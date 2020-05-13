@@ -36,7 +36,19 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
 
 }
 
-}
+  function confirmationMail($email,$name){
+   $subject="Account Activated Notification";
+   $message="Hello ".$name.",\r\n\r\n"
+      ."Your  account has been created.Click here: ".$_SERVER['SERVER_NAME']."/?"."rand()  to log in.\r\n\r\n";
+   
+$headers="From: mlsghana <no-reply@".$_SERVER['SERVER_NAME'].">";
 
+
+mail($email,$subject,$message,$headers);
+   
+  
+
+  }
+}
 /*$project=new Project;
 $project->connection();*/
