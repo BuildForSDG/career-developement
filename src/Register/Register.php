@@ -1,5 +1,6 @@
 <?php
-    namespace App\Register;
+
+namespace App\Register;
 
     class Register
     {
@@ -21,35 +22,46 @@
 
         public function create()
         {
-            $query = "INSERT INTO ". $this->table_name. "name=:name, type=:type, email=:email, password=:password, phone=:phone, location=:location, business_description=:business_description, education_level=:education_level";
 
+            $queryBuilder = $this->conn->createQueryBuilder();
+            $queryBuilder->insert('users')
+                        ->setValue('name', '?')
+                        ->setValue('email', '?')
+                        ->setValue('password', '?')
+                        ->setValue('type', '?')
+                        ->setValue('phone', '?')
+                        ->setParameter(0, $this->name)
+                        ->setParameter(1, $this->email)
+                        ->setParameter(2, $this->password)
+                        ->setParameter(3, $this->type)
+                        ->setParameter(4, $this->phone);
+                $stmt = $queryBuilder->execute();
+                $id = $this->conn->lastInsertId();
 
-            $stmt = $this->conn->prepare($query);
+                if($id){
+                    $queryBuilder = $this->conn->createQueryBuilder();
+                    $queryBuilder->insert('user_details')
+                                ->setValue('users_id', '?')
+                                ->setValue('location', '?')
+                                ->setValue('company', '?')
+                                ->setValue('educational_level', '?')
+                                ->setValue('business_description', '?')
+                                ->setParameter(0, $id)
+                                ->setParameter(1, $this->location)
+                                ->setParameter(2, $this->company)
+                                ->setParameter(3, $this->education_level)
+                                ->setParameter(4, $this->business_description);
+                    $stmt = $queryBuilder->execute();
 
-            $this->name=htmlspecialchars(strip_tags($this->name));
-            $this->type=htmlspecialchars(strip_tags($this->type));
-            $this->email=htmlspecialchars(strip_tags($this->email));
-            $this->password=htmlspecialchars(strip_tags($this->password));
-            $this->phone=htmlspecialchars(strip_tags($this->phone));
-            $this->location=htmlspecialchars(strip_tags($this->location));
-            $this->education_level=htmlspecialchars(strip_tags($this->education_level));
-            $this->business_description=htmlspecialchars(strip_tags($this->business_description));
+                    if($stmt) {
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }else {
+                    echo "Error Saving user";
+                }
 
-            $stmt->bindParam(":name", $this->name);
-            $stmt->bindParam(":type", $this->type);
-            $stmt->bindParam(":email", $this->email);
-            $stmt->bindParam(":password", $this->password);
-            $stmt->bindParam(":phone", $this->phone);
-            $stmt->bindParam(":location", $this->location);
-            $stmt->bindParam(":education_level", $this->education_level);
-            $stmt->bindParam(":business_description", $this->business_description);
-
-
-            if($stmt->execute()){
-                return true;
-            }else{
-                return false;
-            }
         }
 
     }

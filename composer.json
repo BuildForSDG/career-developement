@@ -1,11 +1,13 @@
 {
-  "name": "",
-  "description": "",
+  "name": "career/dev",
+  "description": "Career Development",
   "require-dev": {
     "phpunit/phpunit": "^9.1",
     "friendsofphp/php-cs-fixer": "^2.0"
   },
-  "require": {},
+  "require": {
+    "doctrine/dbal": "^2.10"
+  },
   "scripts": {
     "test": "phpunit",
     "php-cs-fixer": "php-cs-fixer fix ./"

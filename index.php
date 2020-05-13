@@ -6,4 +6,4 @@ use App\Project;
 
 $project = new Project();
 
-$project->registion();
+$project->register();

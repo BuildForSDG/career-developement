@@ -1,23 +1,24 @@
 <?php 
-class Database 
+
+use Doctrine\DBAL\Driver\PDOException;
+
+require '../vendor/autoload.php';
+
+class Database
 {
-    private $host = "localhost";
-    private $dbname = 'careerdb';
-    private $username = 'root';
-    private $password = "";
+
 
     public $conn;
 
-
     public function getConnection()
     {
-        $this->conn = null;
-
         try {
-            $this->conn = new PDO("mysql:host=". $this->host. ";dbname=". $this->dbname, $this->username, $this->password);
-
+            $connParam = [
+                'url' => 'mysql://root@localhost/careerdb'
+            ];
+            $this->conn = \Doctrine\DBAL\DriverManager::getConnection($connParam);
         } catch (PDOException $e) {
-            echo "Connection Error: " . $e->getMessage();
+            echo "Connection Error ". $e->getMessage();
         }
 
         return $this->conn;

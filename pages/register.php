@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 use App\Register\Register;
 
     include_once('../config/database.php');
@@ -18,7 +14,8 @@ use App\Register\Register;
     if($_POST){
 
         $user->name = $_POST['name'];
-        $user->usertype = $_POST['usertype'];
+        $user->type = $_POST['usertype'];
+        $user->location = $_POST['location'];
         $user->company = $_POST['company'];
         $user->phone = $_POST['phone'];
         $user->password = $_POST['password'];
@@ -87,8 +84,7 @@ use App\Register\Register;
                 <span class="fa fa-log-in form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback educational_level" hidden>
-
-                <select name="education_level" id="" class="form-control">
+                <select name="education_level" class="form-control">
                     <option value="">Educational Level</option>
                     <option value="SHS">SHS</option>
                     <option value="Tertiary">Tertiary</option>
@@ -121,10 +117,18 @@ use App\Register\Register;
                 Google</a>
         </div>
 
-        <a href="#" class="text-center">I already have a membership</a>
+        <a href="#" class="text-center" id="loadLogin" >I already have a membership</a>
     </div>
     <!-- /.form-box -->
 </div>
 <?php
     include('../includes/footer.php')
 ?>
+
+<script>
+    $(document).ready(function(){
+        $("#loadLogin").on('click', function(){
+            window.location.href = 'login.php';
+        })
+    });
+</script>

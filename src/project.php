@@ -14,9 +14,9 @@ class Project
         return $login->loadLoginView();
     }
 
-    public function registion()
+    public function register()
     {
         $register = new Register($this->db);
-        return $register->loadRegisterView();
+        return $register->create();
     }
 }
