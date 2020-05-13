@@ -54,6 +54,10 @@
         if($project->registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level)){
           $i=1;
         }
+        
+       if(confirmationMail($email,$name)){
+         $x=1;
+       }
 
         }
 
