@@ -55,7 +55,7 @@
           $i=1;
         }
         
-       if(confirmationMail($email,$name)){
+       if($project->confirmationMail($email,$name)){
          $x=1;
        }
 
