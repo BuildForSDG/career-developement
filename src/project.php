@@ -49,6 +49,25 @@ mail($email,$subject,$message,$headers);
   
 
   }
+
+  function loginUser($dbc,$email,$password){
+    $q="SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
+    
+    $r=mysqli_query($dbc,$q);
+    
+    if(mysqli_num_rows($r)==1){
+
+      $x=mysqli_fetch_assoc($r);
+       
+       if($x['status']=='Active'){
+       
+        $_SESSION['user']=$x;
+        //print_r($_SESSION['user']);
+        header('Location:profile.php');
+       }
+  }
+ }
 }
+
 /*$project=new Project;
 $project->connection();*/
