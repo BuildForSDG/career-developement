@@ -33,7 +33,9 @@
     <h3><a href="#"><b></b>Registration Page</a></h3>
     
   </div>
-  <?php include "src/project.php"; 
+  <?php 
+  error_reporting(0);
+  include "src/project.php"; 
         use App\Project;
          $project=new Project;
         
