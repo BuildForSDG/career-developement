@@ -24,8 +24,9 @@
         $educational_level=$_POST['educational_level'];
         $company=$_POST['company'];
         $name=$_POST['name'];
+        $category=$_POST['category'];
         
-        if($project->registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level)){
+        if($project->registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level,$category)){
           $i=1;
         }
         
@@ -94,6 +95,18 @@
           <option value="SHS">SHS</option>
           <option value="Tertiary">Tertiary</option>
           
+        </select>
+        <span class="fa fa-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback category" hidden>
+        
+        <select name="category" id="" class="form-control" >
+          <option value="">Category</option>
+          <option >Fashion</option>
+          <option >Beauty/Cosmetics</option>
+          <option >IT</option>
+          <option >Carpentary</option>
+          <option >Artistry</option>
         </select>
         <span class="fa fa-user form-control-feedback"></span>
       </div>

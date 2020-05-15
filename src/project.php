@@ -21,11 +21,11 @@ class Project
 
  }
 
- function registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level){
+ function registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level,$category){
   
 
-$q="INSERT INTO users (name,type,email,password,mobile,location,business_description,company,educational_level) 
-VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$business_description','$company','$educational_level') ";
+$q="INSERT INTO users (name,type,email,password,mobile,location,business_description,company,educational_level,category) 
+VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$business_description','$company','$educational_level','$category') ";
 
 
    if (mysqli_query($dbc,$q)) {
