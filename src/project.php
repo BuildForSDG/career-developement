@@ -63,7 +63,7 @@ mail($email,$subject,$message,$headers);
        
         $_SESSION['user']=$x;
         //print_r($_SESSION['user']);
-        header('Location:profile.php');
+        header('Location:dashboard.php');
        }
   }
  }

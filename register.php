@@ -38,7 +38,7 @@
 
        
       if(isset($i)){ ?>
-  <div class="alert alert-success">User Created</div>
+  <div class="alert alert-success">User Created. Check For a Confirmation Email</div>
   <?php }?>
   <div class="register-box-body">
     <p class="login-box-msg">Register a new membership</p>
