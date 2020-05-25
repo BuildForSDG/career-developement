@@ -36,22 +36,23 @@
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
 
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
 
-      <!-- Sidebar Menu -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
-        <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Trainers</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Trainees</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Investors</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Service Providers</span></a></li>
-      </ul>
-      <!-- /.sidebar-menu -->
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+                <!-- Sidebar Menu -->
+                <ul class="sidebar-menu" data-widget="tree">
+
+                    <li class="header">HEADER</li>
+                    <!-- Optionally, you can add icons to the links -->
+                    <li class="active"><a href="list-of-trainers.php"><i class="fa fa-link"></i> <span>Trainers</span></a></li>
+                    <li><a href="list-of-trainees.php"><i class="fa fa-link"></i> <span>Trainees</span></a></li>
+                    <li><a href="list-of-investors.php"><i class="fa fa-link"></i> <span>Investors</span></a></li>
+                    <li ><a href="service-providers.php"><i class="fa fa-link"></i> <span>Service Providers</span></a></li>
+                </ul>
+                <!-- /.sidebar-menu -->
+            </section>
+            <!-- /.sidebar -->
+        </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
