@@ -1,4 +1,16 @@
-<?php include('config/header1.php'); ?>
+<?php include('config/header1.php'); 
+
+session_start();
+
+$user = $_SESSION['user'];
+
+if(!isset($user))
+{
+    header('login.php');
+}
+
+
+?>
 
 
 
@@ -27,7 +39,7 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <li>
-            <a href="/logout" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
+            <a href="logout.php" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
           </li>
         </ul>
       </div>
@@ -43,12 +55,15 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">HEADER</li>
+      <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Trainers</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Trainees</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Investors</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Service Providers</span></a></li>
+
+        <li  ><a href="dashboard.php"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+        <li  ><a href="profile.php"><i class="fa fa-link"></i> <span>Profile</span></a></li>
+        <li class="active" ><a href="list-of-trainers.php"><i class="fa fa-link"></i> <span>Trainers</span></a></li>
+        <li><a href="list-of-trainees.php"><i class="fa fa-link"></i> <span>Trainees</span></a></li>
+        <li><a href="list-of-investors.php"><i class="fa fa-link"></i> <span>Investors</span></a></li>
+        <li><a href="service-providers.php"><i class="fa fa-link"></i> <span>Service Providers</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
