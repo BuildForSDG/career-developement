@@ -1,7 +1,10 @@
 <?php include('config/header1.php');
+
+
 session_start();
 
 $user = $_SESSION['user'];
+
 
 if (!isset($user)) {
     header('login.php');
@@ -69,9 +72,7 @@ if (!isset($user)) {
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-
                 <small>Profile Of User</small>
-
             </h1>
             <?php
             require('src/project.php');
@@ -155,7 +156,7 @@ if (!isset($user)) {
                             <!-- /.tab-pane -->
 
                             <div class="tab-pane active" id="settings">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" method="POST">
 
                                     <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
                                     <input type="hidden" name="type" value="<?php echo $user['type'] ?>">
@@ -216,12 +217,12 @@ if (!isset($user)) {
 
 
                                             <div class="col-sm-10">
-                                                <select name="education_level" id="" class="form-control">
+                                                <select name="educational_level" id="" class="form-control">
                                                     <option value="">Educational Level</option>
-                                                    <option value="SHS" <?php if ($user['education_level'] == 'SHS') echo 'selected' ?> >
+                                    <option value="SHS" <?php if ($user['educational_level'] == 'SHS') { ?> selected <?php } ?> >
                                                         SHS
                                                     </option>
-                                                    <option value="Tertiary" <?php if ($user['education_level'] == 'Tertiary') echo 'selected' ?>>
+                                                    <option value="Tertiary" <?php if ($user['educational_level'] == 'Tertiary') { ?> selected <?php } ?>>
                                                         Tertiary
                                                     </option>
 
@@ -255,12 +256,12 @@ if (!isset($user)) {
                             <div class="tab-pane" id="summary">
                                 <li>Name :<?php echo $user['name'] ?></li>
                                 <li>Email:<?php echo $user['email'] ?></li>
-                                <li>Phone :<?php $user['mobile'] ?></li>
+                                <li>Phone :<?php echo $user['mobile'] ?></li>
                                 <li>Location: <?php echo $user['location'] ?></li>
                                 <?php
                                 if ($user['type'] == 'trainee') {
                                     ?>
-                                    <li>Education Level: <?php echo $user['educational_leve'] ?></li>
+                                    <li>Education Level: <?php echo $user['educational_level'] ?></li>
                                 <?php } else { ?>
                                     <li>Business Description :<?php echo $user['business_description'] ?></li>
                                     <li>Company: <?php echo $user['company'] ?></li>
