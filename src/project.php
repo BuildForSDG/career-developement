@@ -4,12 +4,14 @@ namespace App;
 
 class Project
 {
+
+
   function connection()
   {
-    $servername = $_SERVER['SERVER_NAME'];
-    $username = "root";
-    $password = "";
-    $database = 'careerdb';
+    $servername = $_SERVER['localhost'];
+    $username = "Alalinga";
+    $password = "MUba$17912sophia";
+    $database = "careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
     return $dbc;
@@ -64,6 +66,68 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
       }
     }
   }
+
+  function fetchAllInvestors($dbc, $location, $category)
+  {
+    global $result;
+    if(empty($location) && empty($category)){
+    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE type='investor'";
+    $result = $dbc->query($sql);
+    }
+
+    elseif (!empty($location) && empty($category)) {
+      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location'";
+      $result = $dbc->query($sql);
+      
+    }
+    elseif(!empty($category) && empty($location)){
+      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE category='$category'";
+    
+      $result = $dbc->query($sql);
+
+    }
+   elseif(!empty($location) && !empty($category)){
+    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location' AND category='$category'";
+    $result = $dbc->query($sql);
+   }
+
+
+    return $result;
+  }
+  function fetchAllTrainees($dbc, $location){
+    global $result;
+    if(empty($location)){
+    $sql = "SELECT name,mobile,email,location FROM users WHERE type='trainee'";
+    $result = $dbc->query($sql);
+    }
+
+    elseif (!empty($location)) {
+      $sql = "SELECT name,mobile,email,location FROM users WHERE location='$location'";
+      $result = $dbc->query($sql);
+      
+    }
+   return $result;
+  }
+
+
+  function fetchAllServiceproviders($dbc, $location)
+  {
+    global $result;
+    if(empty($location) && empty($category)){
+    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE type='service_provider' ";
+    $result = $dbc->query($sql);
+    }
+
+    elseif (!empty($location)) {
+      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location'";
+      $result = $dbc->query($sql);
+      
+    }
+    
+
+    return $result;
+  }
+
 }
 
 
