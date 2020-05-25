@@ -2,6 +2,8 @@
 
 namespace App;
 
+use mysqli;
+
 class Project
 {
     function connection(){
@@ -67,6 +69,25 @@ mail($email,$subject,$message,$headers);
        }
   }
  }
+}
+
+function updateUserInfo($dbc)
+{
+  if($_POST['type'] == 'trainee')
+  {
+     $query = "UPDATE users SET name='$_POST['name']', mobile='$_POST['mobile']', email='$_POST['email']', location='$_POST['location']', educational_level='$_POST['educational_level']' WHERE id= '$_POST['id']'";
+    }else{
+      
+      $query = "UPDATE users SET name='$_POST['name']', mobile='$_POST['mobile']', email='$_POST['email']', location='$_POST['location']', company='$_POST['company']', business_description='$_POST['business_description']', WHERE id= '$_POST['id']'";
+  }
+
+  $run = mysqli_query($dbc, $query);
+
+  if($run)
+  {
+    return true;
+  }
+
 }
 
 /*$project=new Project;
