@@ -71,12 +71,13 @@ mail($email,$subject,$message,$headers);
  }
   function updateUserInfo($dbc)
   {
+    $id = $_POST['id'];
     $name = $_POST['name'];
     $mobile= $_POST['mobile'];
     $email=$_POST['email'];
     $location=$_POST['location'];
     $educational_level=$_POST['educational_level'];
-    $id = $_POST['id']; $company=$_POST['company'];
+    $company=$_POST['company'];
     $business_description=$_POST['business_description'];
     if($_POST['type'] == 'trainee')
     {
