@@ -125,7 +125,18 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
     }
     
 
+<<<<<<< HEAD
     return $result;
+=======
+      $x=mysqli_fetch_assoc($r);
+       
+       if($x['status']=='Active'){
+       
+        $_SESSION['user']=$x;
+        //print_r($_SESSION['user']);
+        header('Location:dashboard.php');
+       }
+>>>>>>> 4917c70b95b34c2f5d600e03760e7a0d02858b9e
   }
 
 }
