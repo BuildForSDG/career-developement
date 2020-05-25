@@ -118,7 +118,7 @@ if (!isset($user)) {
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="/img/user4-128x128.jpg"
+                            <img class="profile-user-img img-responsive img-circle" src="img/user4-128x128.jpg"
                                  alt="User profile picture">
 
                             <h3 class="profile-username text-center"><?php echo $user['name'] ?></h3>
@@ -195,21 +195,13 @@ if (!isset($user)) {
                                                    placeholder="eg.nina@gmail.com">
                                         </div>
                                     </div>
+
+
                                     <?php
+
                                     if ($user['type'] == 'trainee') {
 
                                         ?>
-                                        <div class="form-group">
-
-                                            <label for="inputName" class="col-sm-2 control-label">Company Name</label>
-
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control"
-                                                       value="<?php echo $user['company'] ?>" name="company"
-                                                       id="inputName" placeholder="eg. Fashion Institute">
-                                            </div>
-                                        </div>
-
 
                                         <div class="form-group">
                                             <label for="inputName" class="col-sm-2 control-label">Educational
@@ -230,6 +222,23 @@ if (!isset($user)) {
 
                                             </div>
                                         </div>
+
+                                        <?php 
+                                            }else  {
+                                        ?>
+                                        <div class="form-group">
+
+                                            <label for="inputName" class="col-sm-2 control-label">Company Name</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control"
+                                                       value="<?php echo $user['company'] ?>" name="company"
+                                                       id="inputName" placeholder="eg. Fashion Institute">
+                                            </div>
+                                        </div>
+
+
+                                        
 
 
                                         <div class="form-group">
