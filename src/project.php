@@ -69,26 +69,32 @@ mail($email,$subject,$message,$headers);
        }
   }
  }
+  function updateUserInfo($dbc)
+  {
+    $name = $_POST['name'];
+    $mobile= $_POST['mobile'];
+    $email=$_POST['email'];
+    $location=$_POST['location'];
+    $educational_level=$_POST['educational_level'];
+    $id = $_POST['id']; $company=$_POST['company'];
+    $business_description=$_POST['business_description'];
+    if($_POST['type'] == 'trainee')
+    {
+        $query = "UPDATE users SET name=$name, mobile=$mobile, email=$email, location=$location, educational_level=$educational_level WHERE id=$id";
+      }else{
+        $query = "UPDATE users SET name=$name, mobile=$mobile, email=$email, location=$location, educational_level=$educational_level, company=$company, business_description=$business_description  WHERE id=$id";
+    }
+  
+    $run = mysqli_query($dbc, $query);
+  
+    if($run)
+    {
+      return true;
+    }
+  
+  }
 }
 
-function updateUserInfo($dbc)
-{
-  if($_POST['type'] == 'trainee')
-  {
-     $query = "UPDATE users SET name='$_POST['name']', mobile='$_POST['mobile']', email='$_POST['email']', location='$_POST['location']', educational_level='$_POST['educational_level']' WHERE id= '$_POST['id']'";
-    }else{
-      
-      $query = "UPDATE users SET name='$_POST['name']', mobile='$_POST['mobile']', email='$_POST['email']', location='$_POST['location']', company='$_POST['company']', business_description='$_POST['business_description']', WHERE id= '$_POST['id']'";
-  }
-
-  $run = mysqli_query($dbc, $query);
-
-  if($run)
-  {
-    return true;
-  }
-
-}
 
 /*$project=new Project;
 $project->connection();*/

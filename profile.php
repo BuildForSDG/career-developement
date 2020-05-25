@@ -1,4 +1,4 @@
-<?php include('config/header1.php'); 
+<?php include('config/header1.php');
 session_start();
 
 $user = $_SESSION['user'];
