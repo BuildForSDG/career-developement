@@ -39,36 +39,33 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
 }
 
   function confirmationMail($email,$name){
-   $subject="Account Activated Notification";
-   $message="Hello ".$name.",\r\n\r\n"
+    $subject="Account Activated Notification";
+    $message="Hello ".$name.",\r\n\r\n"
       ."Your  account has been created.Click here: ".$_SERVER['SERVER_NAME'].'/'.$email."  to log in.\r\n\r\n";
-   
-$headers="From: mlsghana <no-reply@".$_SERVER['SERVER_NAME'].">";
+
+    $headers="From: mlsghana <no-reply@".$_SERVER['SERVER_NAME'].">";
 
 
-mail($email,$subject,$message,$headers);
-   
-  
+  mail($email,$subject,$message,$headers);
+
 
   }
 
   function loginUser($dbc,$email,$password){
     $q="SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
-    
+
     $r=mysqli_query($dbc,$q);
-    
+
     if(mysqli_num_rows($r)==1){
 
       $x=mysqli_fetch_assoc($r);
-       
-       if($x['status']=='Active'){
-       
+      if($x['status']=='Active'){
         $_SESSION['user']=$x;
         //print_r($_SESSION['user']);
         header('Location:dashboard.php');
-       }
+      }
   }
- }
+  }
   function updateUserInfo($dbc)
   {
     $id = $_POST['id'];
@@ -87,16 +84,11 @@ mail($email,$subject,$message,$headers);
       }else{
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level', company='$company', business_description='$business_description'  WHERE id='$id'";
     }
-  
     $run = mysqli_query($dbc, $query);
-
-
-  
     if($run)
     {
       return true;
     }
-  
   }
 }
 
