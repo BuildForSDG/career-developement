@@ -9,8 +9,8 @@ class Project
   function connection()
   {
     $servername = $_SERVER['localhost'];
-    $username = "Alalinga";
-    $password = "MUba$17912sophia";
+    $username = " ";
+    $password = " ";
     $database = "careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
@@ -122,21 +122,9 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
       $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location'";
       $result = $dbc->query($sql);
       
-    }
-    
+    }  
 
-<<<<<<< HEAD
     return $result;
-=======
-      $x=mysqli_fetch_assoc($r);
-       
-       if($x['status']=='Active'){
-       
-        $_SESSION['user']=$x;
-        //print_r($_SESSION['user']);
-        header('Location:dashboard.php');
-       }
->>>>>>> 4917c70b95b34c2f5d600e03760e7a0d02858b9e
   }
 
 }
