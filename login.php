@@ -52,8 +52,8 @@
         Google</a> 
     </div> -->
     <!-- /.social-auth-links -->
-
-    <!-- <a href="#">I forgot my password</a><br> -->
+  <br>
+ <center><a href="register.php">Register to create an account</a></center> 
   
 
   </div>
