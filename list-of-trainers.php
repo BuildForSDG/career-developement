@@ -99,13 +99,13 @@ $post=$_POST;
         <div class="col-sm-6">
         <h3 class="box-title">List Of Trainers</h3>
       </div>
-      <div class="col-sm-3">
-        <div class="box-tools">
+      <div class="col-sm-6">
+        
           
-            <form action="" method="post">
-          <div class="input-group input-group-sm" >
+            <form  method="post" class="form-inline">
+          
             
-           <select name="" id="" class="form-control">
+           <select name="location" id="" class="form-control">
              <option value="">Search By Location</option>
              <?php
                             $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainer'");
@@ -116,21 +116,8 @@ $post=$_POST;
                           } ?>
            </select>
 
-              <div class="input-group-btn">
-                <button type="submit" class="btn btn-warning" ><i class="fa fa-search"></i></button>
-              </div>
-            </div>
-            </form>
-      </div>
-
-    </div>
-    <div class="col-sm-3">
-      <div class="box-tools">
-        
-          <form action="" method="post">
-        <div class="input-group input-group-sm" >
           
-         <select name="" id="" class="form-control">
+         <select name="category" id="" class="form-control">
            <option value="">Search By Categories</option>
    
                             <?php
@@ -142,12 +129,11 @@ $post=$_POST;
                           } ?>
          </select>
 
-            <div class="input-group-btn">
+           
               <button type="submit" class="btn btn-danger" ><i class="fa fa-search"></i></button>
-            </div>
-          </div>
+           
           </form>
-    </div>
+  
 
   </div>
       </div>
@@ -165,9 +151,24 @@ $post=$_POST;
              
           </tr>
           <?php
+            $post=$_POST;
+          if($post){
+            if ($post['location']!=NULL && $post['category']==NULL ){
+                $sql="SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND status='Active'";
+                
+            } elseif($post['category']!=NULL && $post['location'] ==NULL ){
 
-$sql = "SELECT * FROM users  WHERE type='trainer'";
+        $sql = "SELECT * FROM users  WHERE type='trainer' AND category='$post[category]' AND status='Active'";
 
+            }elseif($post['location'] !=NULL && $post['category'] !=NULL){
+              $sql = "SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND category='$post[category]' AND status='Active'";
+            }
+          
+          }
+            else{
+
+$sql = "SELECT * FROM users  WHERE type='trainer' AND status='Active'";
+            }
      $run = mysqli_query($dbc, $sql);
                   // output data of each row
                   while ($row = mysqli_fetch_assoc($run)) { ?>
