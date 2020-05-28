@@ -22,7 +22,7 @@ if(!isset($user))
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b></b></span>
-      <h5>Welcome, <?php echo $user['name']?></h5>
+      <h5>Welcome, <?php print_r($user['name']);?></h5>
     </a>
 
     <!-- Header Navbar -->
