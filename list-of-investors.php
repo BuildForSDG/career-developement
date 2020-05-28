@@ -8,15 +8,8 @@ use App\Project;
 
 $project = new Project;
 $dbc = $project->connection();
-$post=$_POST;
 
-//print_r($project);die();
-if (!empty($post["location"]) || !empty($post["category"])) {
-    $investor = $project->fetchAllInvestors($dbc, $post["location"], $post["category"]);
-} else {
 
-    $investor = $project->fetchAllInvestors($dbc, "", "");
-}
 
 ?>
 
@@ -47,7 +40,7 @@ if (!empty($post["location"]) || !empty($post["category"])) {
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="logout" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a href="logout.php" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -103,7 +96,7 @@ if (!empty($post["location"]) || !empty($post["category"])) {
                         <div class="col-sm-3">
                             <div class="box-tools">
 
-                                <form action="" method="post">
+                                <form  method="post">
                                     <div class="input-group input-group-sm">
 
                                         <select name="location" id="location" class="form-control">
@@ -140,10 +133,15 @@ if (!empty($post["location"]) || !empty($post["category"])) {
                                
                             </tr>
                             <?php
+                            $post=$_POST;
+                            if ($post){
+                                $sql="SELECT * FROM users  WHERE type='investor' AND location='$post[location]' AND status='Active'";
+                                
+                            } else{
 
-              $sql = "SELECT * FROM users  WHERE type='investor'";
-     
-                   $run = mysqli_query($dbc, $sql);
+                     $sql = "SELECT * FROM users  WHERE type='investor' AND status='Active'";
+                            }
+                      $run = mysqli_query($dbc, $sql);
                                 // output data of each row
                                 while ($row = mysqli_fetch_assoc($run)) { ?>
                                     <tr>
@@ -154,7 +152,11 @@ if (!empty($post["location"]) || !empty($post["category"])) {
                                         <td><?php echo  $row['location']; ?></td>
                                         <td><?php echo $row['business_description']; ?></td>
                                     </tr>
-                                <?php } ?>
+                                <?php } 
+                                 
+                                ?>
+
+
                                 </table>
                             
                     </div>
