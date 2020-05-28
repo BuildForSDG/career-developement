@@ -1,4 +1,4 @@
-<?php include('config/header.php'); ?>
+<?php include 'config/header.php'; ?>
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
@@ -12,19 +12,20 @@
          $project=new Project;
         
          $dbc= $project->connection();
+         $post=$_POST;
          
-        if($_POST){
+        if($post){
            
-          $type_of_user= $_POST['type_of_user'];
-        $email=$_POST['email'];
-        $password=md5($_POST['password']);
-        $mobile=$_POST['mobile'];
-       $location=$_POST['location'];
-       $business_description=$_POST['business_description'];
-        $educational_level=$_POST['educational_level'];
-        $company=$_POST['company'];
-        $name=$_POST['name'];
-        $category=$_POST['category'];
+          $type_of_user=htmlspecialchars($post['type_of_user'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $email=htmlspecialchars($post['email'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $password=htmlspecialchars(md5($post['password']), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $mobile=htmlspecialchars($post['mobile'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+       $location=htmlspecialchars($post['location'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+       $business_description=htmlspecialchars($post['business_description'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $educational_level=htmlspecialchars($post['educational_level'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $company=htmlspecialchars($post['company'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $name=htmlspecialchars($post['name'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+        $category=htmlspecialchars($post['category'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
         
         if($project->registerUser ($dbc,$type_of_user,$password,$location,$business_description,$company,$name,$email,$mobile,$educational_level,$category)){
           $i=1;
@@ -126,7 +127,7 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
+    <!-- <div class="social-auth-links text-center">
       <p>- OR -</p>
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
         Facebook</a>
@@ -134,10 +135,10 @@
         Google</a>
     </div>
 
-    <a href="#" class="text-center">I already have a membership</a>
+    <a href="#" class="text-center">I already have a membership</a> -->
   </div>
   <!-- /.form-box -->
 </div>
 <!-- /.register-box -->
 
-<?php include('config/footer.php');
+<?php include 'config/footer.php';

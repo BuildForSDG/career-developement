@@ -12,10 +12,11 @@
        session_start();
        use App\Project;
         $project=new Project;
-       
+         $post=$_POST;
+
         $dbc= $project->connection();
-        if($_POST){
-            $project->loginUser($dbc,$_POST['email'],$_POST['password']);
+        if($post){
+            $project->loginUser($dbc,$post['email'],$post['password']);
         }
         ?>
     <form  method="post">
@@ -43,16 +44,16 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
-      <!-- <br><p>- OR -</p><br> -->
+    <!-- <div class="social-auth-links text-center">
+     <br><p>- OR -</p><br> 
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
         Facebook</a>
       <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google"></i> Sign in using
         Google</a> 
-    </div>
+    </div> -->
     <!-- /.social-auth-links -->
 
-    <a href="#">I forgot my password</a><br>
+    <!-- <a href="#">I forgot my password</a><br> -->
   
 
   </div>

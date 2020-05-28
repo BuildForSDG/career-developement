@@ -10,9 +10,9 @@ class Project
 
   function connection()
   {
-    $servername = $_SERVER['localhost'];
-    $username = " ";
-    $password = " ";
+    $servername = $_SERVER['SERVER_NAME'];
+    $username = "root";
+    $password = "";
     $database = "careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
@@ -44,7 +44,7 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
     $message = "Hello " . $name . ",\r\n\r\n"
       . "Your  account has been created.Click here: " . $_SERVER['SERVER_NAME'] . '/' . $email . "  to log in.\r\n\r\n";
 
-    $headers = "From: mlsghana <no-reply@" . $_SERVER['SERVER_NAME'] . ">";
+    $headers = "From:  <no-reply@" . $_SERVER['SERVER_NAME'] . ">";
 
 
     mail($email, $subject, $message, $headers);
@@ -74,15 +74,17 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
     $mobile= $_POST['mobile'];
     $email= $_POST['email'];
     $location= $_POST['location'];
-    $educational_level= $_POST['educational_level'];
-    $company= $_POST['company'];
-    $business_description= $_POST['business_description'];
+   
+    
 
 
     if($_POST['type'] == 'trainee')
     {
+      $educational_level= $_POST['educational_level'];
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level' WHERE id='$id'";
       }else{
+        $company= $_POST['company'];
+        $business_description= $_POST['business_description'];
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level', company='$company', business_description='$business_description'  WHERE id='$id'";
     }
     $run = mysqli_query($dbc, $query);
@@ -91,72 +93,15 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
       return true;
     }
   }
+
+
+
+  
+  
+
+
+  
+
 }
 
 
-  function fetchAllInvestors($dbc, $location, $category)
-  {
-    global $result;
-    if(empty($location) && empty($category)){
-    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE type='investor'";
-    $result = $dbc->query($sql);
-    }
-
-    elseif (!empty($location) && empty($category)) {
-      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location'";
-      $result = $dbc->query($sql);
-      
-    }
-    elseif(!empty($category) && empty($location)){
-      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE category='$category'";
-    
-      $result = $dbc->query($sql);
-
-    }
-   elseif(!empty($location) && !empty($category)){
-    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location' AND category='$category'";
-    $result = $dbc->query($sql);
-   }
-
-
-    return $result;
-  }
-  function fetchAllTrainees($dbc, $location){
-    global $result;
-    if(empty($location)){
-    $sql = "SELECT name,mobile,email,location FROM users WHERE type='trainee'";
-    $result = $dbc->query($sql);
-    }
-
-    elseif (!empty($location)) {
-      $sql = "SELECT name,mobile,email,location FROM users WHERE location='$location'";
-      $result = $dbc->query($sql);
-      
-    }
-   return $result;
-  }
-
-
-  function fetchAllServiceproviders($dbc, $location)
-  {
-    global $result;
-    if(empty($location) && empty($category)){
-    $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE type='service_provider' ";
-    $result = $dbc->query($sql);
-    }
-
-    elseif (!empty($location)) {
-      $sql = "SELECT name,mobile,email,company,location,business_description FROM users WHERE location='$location'";
-      $result = $dbc->query($sql);
-      
-    }  
-
-    return $result;
-  }
-
-
-
-
-
-/*$project=new Project;
-$project->connection();*/
