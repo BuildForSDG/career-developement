@@ -1,18 +1,17 @@
-<?php include('config/header1.php'); ?>
-<?php
-require "src/project.php";
+<?php include  'config/header1.php'; 
+include "src/project.php";
+session_start();
+
+$user = $_SESSION['user'];
 
 use App\Project;
 
 $project = new Project;
 $dbc = $project->connection();
+$post=$_POST;
 
-if (!empty($_POST["location"])) {
-    $investor = $project->fetchAllServiceproviders($dbc, $_POST["location"]);
-} else {
 
-    $investor = $project->fetchAllServiceproviders($dbc, "");
-}
+
 
 ?>
 
@@ -33,7 +32,7 @@ if (!empty($_POST["location"])) {
 
 
                 ?>
-                <h5>Welcome, Nina Mcintire</h5>
+                <h5>Welcome, <?php print_r($user['name']);?></h5>
             </a>
 
             <!-- Header Navbar -->
@@ -46,7 +45,7 @@ if (!empty($_POST["location"])) {
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="/logout" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a href="logout" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -64,6 +63,8 @@ if (!empty($_POST["location"])) {
 
                     <li class="header">HEADER</li>
                     <!-- Optionally, you can add icons to the links -->
+                    <li><a href="dashboard.php"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+                <li><a href="profile.php"><i class="fa fa-link"></i> <span>Profile</span></a></li>
                     <li><a href="list-of-trainers.php"><i class="fa fa-link"></i> <span>Trainers</span></a></li>
                     <li><a href="list-of-trainees.php"><i class="fa fa-link"></i> <span>Trainees</span></a></li>
                     <li><a href="list-of-investors.php"><i class="fa fa-link"></i> <span>Investors</span></a></li>
@@ -104,21 +105,16 @@ if (!empty($_POST["location"])) {
                                 <form action="" method="post">
                                     <div class="input-group input-group-sm">
 
-                                        <select name="location" id="location" class="form-control">
+                                    <select name="location" id="location" class="form-control">
                                             <option value="">Search By Location</option>
                                             <?php
-                                            $locationResult = $dbc->query("SELECT DISTINCT location FROM users WHERE type='service_provider'");
+                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='service_provider'");
 
-                                            if (!empty($locationResult)) {
-
-                                                while ($row = $locationResult->fetch_assoc()) {
-                                                    echo '<option value="' . $row["location"] . '">' . $row["location"] . '</option>';
-                                                }
-                                            }
-                                            // if ($_POST) {
-                                            //     $investor = $project->fetchAllInvestors($dbc, $_POST["location"], $_POST["category"]);
-                                            // }
-                                            ?>
+                                                while ($row = mysqli_fetch_assoc($locationResult )) { ?>
+                                                <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                                              <?php  
+                                            } ?>
+                                            
                                         </select>
 
                                         <div class="input-group-btn">
@@ -137,44 +133,28 @@ if (!empty($_POST["location"])) {
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Email</th>
-
+                                <th>Company</th>
                                 <th>Location</th>
-
+                              <th>Business Description</th>
 
                             </tr>
                             <?php
-
-
-                            if (mysqli_connect_errno($dbc)) {
-                                die("Failed to connect:" . mysqli_connect_error());
-                            }
-
-                            // Check connection
-
-                            // $sql = "SELECT name,mobile,email,company,location,business_description FROM users";
-                            // $result = $dbc->query($sql);
-
-
-                            if ($investor->num_rows > 0) {
-                                // output data of each row
-                                while ($row = $investor->fetch_assoc()) {
-                                    echo '<tr>
-                                        <td>' . $row["name"] . '</td>
-                                        <td>' . $row["mobile"] . '</td>
-                                        <td>' . $row["email"] . '</td>
-                                        <td>' . $row["company"] . '</td>
-                                        <td>' . $row["location"] . '</td>
-                                        <td>' . $row["business_description"] . '</td>
-                                        <td><a href="profile.php" class="btn btn-info btn-sm"><i class="fa fa-dashboard"></i> </a>' . '</td>
-                                        </tr>';
-                                }
-                                echo '</table>';
-                            } else {
-                                echo "0 results";
-                            }
-
-                            $dbc->close();
-                            ?>
+                              $sql = "SELECT * FROM users  WHERE type='service_provider'";
+     
+                              $run = mysqli_query($dbc, $sql);
+                              
+                                while($service=mysqli_fetch_assoc($run)) { ?>
+                                        <tr>
+                                        <td><?php echo $service['name']; ?></td>
+                                        <td><?php echo $service['mobile']; ?></td>
+                                        <td><?php echo $service['email']; ?></td>
+                                        <td><?php echo $service['company']; ?></td>
+                                        <td><?php echo $service['location']; ?></td>
+                                        <td><?php echo $service['business_description']; ?></td>
+                                                                         </tr>
+                              <?php  }  ?>
+                            </table>
+                            
                     </div>
                     <!-- /.box-body -->
                 </div>
@@ -196,12 +176,9 @@ if (!empty($_POST["location"])) {
         </footer>
 
 
-        <!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
+        
     </div>
     <!-- ./wrapper -->
 
     <!-- REQUIRED JS SCRIPTS -->
-    <?php include('config/footer1.php');
+    <?php include 'config/footer1.php';
