@@ -247,9 +247,10 @@ if (!isset($user)) {
 
                                             <div class="col-sm-10">
                                                 <textarea class="form-control"
-                                                          value="<?php echo $user['business_description'] ?>"
+                                                          
                                                           name="business_description" id="inputExperience"
-                                                          placeholder=""></textarea>
+                                                          placeholder=""><?php echo $user['business_description'] ?>
+                                                          </textarea>
                                             </div>
                                         </div>
 
