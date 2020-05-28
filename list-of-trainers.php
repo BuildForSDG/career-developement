@@ -1,7 +1,7 @@
-<?php include('config/header1.php'); 
+<?php include 'config/header1.php'; 
 
 session_start();
-
+include "src/project.php"; 
 $user = $_SESSION['user'];
 
 if(!isset($user))
@@ -9,6 +9,11 @@ if(!isset($user))
     header('login.php');
 }
 
+use App\Project;
+
+$project = new Project;
+$dbc = $project->connection();
+$post=$_POST;
 
 ?>
 
@@ -26,7 +31,7 @@ if(!isset($user))
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><b></b></span>
-      <h5>Welcome, <?php echo $user['name']?></h5>
+      <h5>Welcome, <?php print_r($user['name']);?></h5>
     </a>
 
     <!-- Header Navbar -->
@@ -102,6 +107,13 @@ if(!isset($user))
             
            <select name="" id="" class="form-control">
              <option value="">Search By Location</option>
+             <?php
+                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainer'");
+
+                             while ($row = mysqli_fetch_assoc($locationResult )) { ?>
+                              <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                            <?php  
+                          } ?>
            </select>
 
               <div class="input-group-btn">
@@ -120,6 +132,14 @@ if(!isset($user))
           
          <select name="" id="" class="form-control">
            <option value="">Search By Categories</option>
+   
+                            <?php
+                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT category FROM users WHERE type='trainer'");
+
+                             while ($row = mysqli_fetch_assoc($locationResult )) { ?>
+                              <option value="<?php echo $row["category"] ?>"><?php echo $row["category"] ?></option>
+                            <?php  
+                          } ?>
          </select>
 
             <div class="input-group-btn">
@@ -141,23 +161,26 @@ if(!isset($user))
             <th>Company</th>
             <th>Location</th>
               <th>Business Description</th>
-              <th>Profile</th>
+              <th>Category</th>
+             
           </tr>
-          <tr>
-            <td>Nina</td>
-            <td>+233546895</td>
-            <td>nina@gmail.com
-              
-            </td>
-            <td>Fashion Design Center</td>
-            <td>Accra</td>
-            <td>We train the best fashion designers in town.</td>
-            <td>
-              <a href="" class="btn btn-info btn-sm">
-                <i class="fa fa-dashboard"></i>
-              </a>
-            </td>
-          </tr>
+          <?php
+
+$sql = "SELECT * FROM users  WHERE type='trainer'";
+
+     $run = mysqli_query($dbc, $sql);
+                  // output data of each row
+                  while ($row = mysqli_fetch_assoc($run)) { ?>
+                      <tr>
+                          <td><?php echo $row['name']; ?></td>
+                          <td><?php echo $row['mobile']; ?></td>
+                          <td><?php echo $row['email']; ?></td>
+                          <td><?php echo $row['company']; ?></td>
+                          <td><?php echo $row['location']; ?></td>
+                          <td><?php echo $row['business_description']; ?></td>
+                          <td><?php echo $row['category']; ?></td>
+                      </tr>
+                  <?php } ?>
           
         </table>
       </div>
@@ -189,4 +212,4 @@ if(!isset($user))
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-<?php include('config/footer1.php');
+<?php include 'config/footer1.php';
