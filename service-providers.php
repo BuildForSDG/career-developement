@@ -45,7 +45,7 @@ $post=$_POST;
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a href="logout" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
+                            <a href="logout.php" style="color:white" id="logout"><i class="fa fa-sign-out"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -139,7 +139,14 @@ $post=$_POST;
 
                             </tr>
                             <?php
-                              $sql = "SELECT * FROM users  WHERE type='service_provider'";
+                               $post=$_POST;
+                               if ($post){
+                                   $sql="SELECT * FROM users  WHERE type='service_provider' AND location='$post[location]' AND status='Active'";
+                                   
+                               } else{
+               
+                           $sql = "SELECT * FROM users  WHERE type='service_provider' AND status='Active'";
+                               }
      
                               $run = mysqli_query($dbc, $sql);
                               
