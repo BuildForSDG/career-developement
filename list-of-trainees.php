@@ -105,10 +105,10 @@ $post=$_POST;
                                         <select name="location" id="location" class="form-control">
                                             <option value="">Search By Location</option>
                                             <?php
-                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainee'");
+                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainee' AND status='Active'");
 
                                                 while ($row = mysqli_fetch_assoc($locationResult )) { ?>
-                                                <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                                                <option value="<?php print_r(stripslashes($row["location"])); ?>"><?php print_r(stripslashes($row["location"])); ?></option>
                                               <?php  
                                             } ?>
                                             
@@ -139,24 +139,24 @@ $post=$_POST;
                 
                 $post=$_POST;
                 if ($post){
-                    $sql="SELECT * FROM users  WHERE type='trainee' AND location='$post[location]' AND status='Active'";
+                    $query="SELECT * FROM users  WHERE type='trainee' AND location='$post[location]' AND status='Active'";
                     
                 } else{
 
-            $sql = "SELECT * FROM users  WHERE type='trainee' AND status='Active'";
+            $query = "SELECT * FROM users  WHERE type='trainee' AND status='Active'";
                 }
      
-                   $run = mysqli_query($dbc, $sql);
+                   $run = mysqli_query($dbc, $query);
 
                                 // output data of each row
                                 while ($row = mysqli_fetch_assoc($run)) { ?>
                                     <tr>
-                                        <td><?php echo $row["name"] ?></td>
-                                        <td><?php echo $row["mobile"] ?></td>
-                                        <td><?php echo $row["email"] ?></td>
+                                        <td><?php print_r(stripslashes($row['name'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['mobile'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['email'])); ?></td>
                                         
-                                        <td><?php echo $row["location"] ?></td>
-                                        <td><?php echo $row["educational_level"] ?></td>
+                                        <td><?php print_r(stripslashes($row['location'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['educational_level'])); ?></td>
                                                                          </tr>
                               <?php  }  ?>
                             </table>
@@ -178,7 +178,7 @@ $post=$_POST;
 
             </div>
             
-            <strong>Copyright &copy; <?php date("y"); ?> <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; <?php print_r(date('Y')); ?><a href="#">Company</a>.</strong> All rights reserved.
         </footer> 
 
 

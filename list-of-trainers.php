@@ -108,10 +108,10 @@ $post=$_POST;
            <select name="location" id="" class="form-control">
              <option value="">Search By Location</option>
              <?php
-                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainer'");
+                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='trainer' AND status='Active'");
 
                              while ($row = mysqli_fetch_assoc($locationResult )) { ?>
-                              <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                              <option value="<?php print_r(stripslashes($row["location"])); ?>"><?php print_r(stripslashes($row["location"])); ?></option>
                             <?php  
                           } ?>
            </select>
@@ -121,10 +121,10 @@ $post=$_POST;
            <option value="">Search By Categories</option>
    
                             <?php
-                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT category FROM users WHERE type='trainer'");
+                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT category FROM users WHERE type='trainer' AND status='Active'");
 
                              while ($row = mysqli_fetch_assoc($locationResult )) { ?>
-                              <option value="<?php echo $row["category"] ?>"><?php echo $row["category"] ?></option>
+                              <option value="<?php print_r(stripslashes($row["category"])); ?>"><?php print_r(stripslashes($row["category"])); ?></option>
                             <?php  
                           } ?>
          </select>
@@ -154,32 +154,32 @@ $post=$_POST;
             $post=$_POST;
           if($post){
             if ($post['location']!=NULL && $post['category']==NULL ){
-                $sql="SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND status='Active'";
+                $query="SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND status='Active'";
                 
             } elseif($post['category']!=NULL && $post['location'] ==NULL ){
 
-        $sql = "SELECT * FROM users  WHERE type='trainer' AND category='$post[category]' AND status='Active'";
+        $query = "SELECT * FROM users  WHERE type='trainer' AND category='$post[category]' AND status='Active'";
 
             }elseif($post['location'] !=NULL && $post['category'] !=NULL){
-              $sql = "SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND category='$post[category]' AND status='Active'";
+              $query = "SELECT * FROM users  WHERE type='trainer' AND location='$post[location]' AND category='$post[category]' AND status='Active'";
             }
           
           }
             else{
 
-$sql = "SELECT * FROM users  WHERE type='trainer' AND status='Active'";
+$query = "SELECT * FROM users  WHERE type='trainer' AND status='Active'";
             }
-     $run = mysqli_query($dbc, $sql);
+     $run = mysqli_query($dbc, $query);
                   // output data of each row
                   while ($row = mysqli_fetch_assoc($run)) { ?>
                       <tr>
-                          <td><?php echo $row['name']; ?></td>
-                          <td><?php echo $row['mobile']; ?></td>
-                          <td><?php echo $row['email']; ?></td>
-                          <td><?php echo $row['company']; ?></td>
-                          <td><?php echo $row['location']; ?></td>
-                          <td><?php echo $row['business_description']; ?></td>
-                          <td><?php echo $row['category']; ?></td>
+                          <td><?php print_r(stripslashes($row['name'])); ?></td>
+                          <td><?php print_r(stripslashes($row['mobile'])); ?></td>
+                          <td><?php print_r(stripslashes($row['email'])); ?></td>
+                          <td><?php print_r(stripslashes($row['company'])); ?></td>
+                          <td><?php print_r(stripslashes($row['location'])); ?></td>
+                          <td><?php print_r(stripslashes($row['business_description'])); ?></td>
+                          <td><?php print_r(stripslashes($row['category'])); ?></td>
                       </tr>
                   <?php } ?>
           
@@ -201,7 +201,7 @@ $sql = "SELECT * FROM users  WHERE type='trainer' AND status='Active'";
       
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; <?php print_r(date('Y')); ?> <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
   

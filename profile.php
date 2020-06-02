@@ -121,17 +121,17 @@ if (!isset($user)) {
                             <img class="profile-user-img img-responsive img-circle" src="img/user4-128x128.jpg"
                                  alt="User profile picture">
 
-                            <h3 class="profile-username text-center"><?php echo $user['name'] ?></h3>
+                            <h3 class="profile-username text-center"><?php print_r(stripslashes( $user['name'])) ?></h3>
 
-                            <p class="text-muted text-center"><?php echo $user['email'] ?></p>
+                            <p class="text-muted text-center"><?php print_r(stripslashes( $user['email'])) ?></p>
 
                             <ul class="list-group list-group-unbordered">
 
                                 <li class="list-group-item">
-                                    <b>Phone Number</b> <a class="pull-right"><?php echo $user['mobile'] ?></a>
+                                    <b>Phone Number</b> <a class="pull-right"><?php print_r(stripslashes($user['mobile'])) ?></a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Location</b> <a class="pull-right"><?php echo $user['location'] ?></a>
+                                    <b>Location</b> <a class="pull-right"><?php print_r(stripslashes($user['location'])) ?></a>
                                 </li>
 
 
@@ -158,13 +158,13 @@ if (!isset($user)) {
                             <div class="tab-pane active" id="settings">
                                 <form class="form-horizontal" method="POST">
 
-                                    <input type="hidden" name="id" value="<?php echo $user['id'] ?>">
-                                    <input type="hidden" name="type" value="<?php echo $user['type'] ?>">
+                                    <input type="hidden" name="id" value="<?php print_r(stripslashes($user['id'])); ?>">
+                                    <input type="hidden" name="type" value="<?php print_r(stripslashes($user['type'])); ?>">
                                     <div class="form-group">
                                         <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" value="<?php echo $user['name'] ?>"
+                                            <input type="text" class="form-control" value="<?php print_r(stripslashes($user['name'])); ?>"
                                                    name="name" id="inputName" placeholder="eg. Kofi Mensah">
                                         </div>
                                     </div>
@@ -173,7 +173,7 @@ if (!isset($user)) {
 
                                         <div class="col-sm-10">
                                             <input type="number" class="form-control"
-                                                   value="<?php echo $user['mobile'] ?>" name="mobile" id="inputName"
+                                                   value="<?php print_r(stripslashes($user['mobile'])); ?>" name="mobile" id="inputName"
                                                    placeholder="eg.+23350000">
                                         </div>
                                     </div>
@@ -182,7 +182,7 @@ if (!isset($user)) {
 
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control"
-                                                   value="<?php echo $user['location'] ?>" name="location"
+                                                   value="<?php print_r(stripslashes($user['location'])); ?>" name="location"
                                                    id="inputName" placeholder="eg. Accra">
                                         </div>
                                     </div>
@@ -191,7 +191,7 @@ if (!isset($user)) {
 
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control"
-                                                   value="<?php echo $user['email'] ?>" name="email" id="inputEmail"
+                                                   value="<?php print_r(stripslashes($user['email'])); ?>" name="email" id="inputEmail"
                                                    placeholder="eg.nina@gmail.com">
                                         </div>
                                     </div>
@@ -232,7 +232,7 @@ if (!isset($user)) {
 
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control"
-                                                       value="<?php echo $user['company'] ?>" name="company"
+                                                       value="<?php print_r(stripslashes($user['company'])); ?>" name="company"
                                                        id="inputName" placeholder="eg. Fashion Institute">
                                             </div>
                                         </div>
@@ -249,7 +249,7 @@ if (!isset($user)) {
                                                 <textarea class="form-control"
                                                           
                                                           name="business_description" id="inputExperience"
-                                                          placeholder=""><?php echo $user['business_description'] ?>
+                                                          placeholder=""><?php print_r(stripslashes($user['business_description'])); ?>
                                                           </textarea>
                                             </div>
                                         </div>
@@ -264,17 +264,17 @@ if (!isset($user)) {
                                 </form>
                             </div>
                             <div class="tab-pane" id="summary">
-                                <li>Name :<?php echo $user['name'] ?></li>
-                                <li>Email:<?php echo $user['email'] ?></li>
-                                <li>Phone :<?php echo $user['mobile'] ?></li>
-                                <li>Location: <?php echo $user['location'] ?></li>
+                                <li>Name :<?php print_r(stripslashes($user['name'])); ?></li>
+                                <li>Email:<?php print_r(stripslashes($user['email'])); ?></li>
+                                <li>Phone :<?php print_r(stripslashes($user['mobile'])); ?></li>
+                                <li>Location: <?php print_r(stripslashes($user['location'])); ?></li>
                                 <?php
                                 if ($user['type'] == 'trainee') {
                                     ?>
-                                    <li>Education Level: <?php echo $user['educational_level'] ?></li>
+                                    <li>Education Level: <?php print_r(stripslashes($user['educational_level'])); ?></li>
                                 <?php } else { ?>
-                                    <li>Business Description :<?php echo $user['business_description'] ?></li>
-                                    <li>Company: <?php echo $user['company'] ?></li>
+                                    <li>Business Description :<?php print_r(stripslashes($user['business_description'])); ?></li>
+                                    <li>Company: <?php print_r(stripslashes($user['company'])); ?></li>
                                 <?php } ?>
                             </div>
                             <!-- /.tab-pane -->
@@ -299,7 +299,7 @@ if (!isset($user)) {
 
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; <?php print_r(date('Y')); ?> <a href="#">Company</a>.</strong> All rights reserved.
     </footer>
 
 

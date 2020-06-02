@@ -102,10 +102,10 @@ $dbc = $project->connection();
                                         <select name="location" id="location" class="form-control">
                                             <option value="">Search By Location</option>
                                             <?php
-                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='investor'");
+                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='investor' AND status='Active'");
 
                                                 while ($row = mysqli_fetch_assoc($locationResult )) { ?>
-                                                <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                                                <option value="<?php print_r(stripslashes( $row["location"])) ?>"><?php print_r(stripslashes( $row["location"])) ?></option>
                                               <?php  
                                             } ?>
                                             
@@ -135,22 +135,22 @@ $dbc = $project->connection();
                             <?php
                             $post=$_POST;
                             if ($post){
-                                $sql="SELECT * FROM users  WHERE type='investor' AND location='$post[location]' AND status='Active'";
+                                $query="SELECT * FROM users  WHERE type='investor' AND location='$post[location]' AND status='Active'";
                                 
                             } else{
 
-                     $sql = "SELECT * FROM users  WHERE type='investor' AND status='Active'";
+                     $query = "SELECT * FROM users  WHERE type='investor' AND status='Active'";
                             }
-                      $run = mysqli_query($dbc, $sql);
+                      $run = mysqli_query($dbc, $query);
                                 // output data of each row
                                 while ($row = mysqli_fetch_assoc($run)) { ?>
                                     <tr>
-                                        <td><?php echo $row['name']; ?></td>
-                                        <td><?php echo $row['mobile']; ?></td>
-                                        <td><?php echo $row['email']; ?></td>
-                                        <td><?php echo $row['company']; ?></td>
-                                        <td><?php echo  $row['location']; ?></td>
-                                        <td><?php echo $row['business_description']; ?></td>
+                                        <td><?php print_r(stripslashes($row['name'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['mobile'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['email'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['company']));?></td>
+                                        <td><?php print_r(stripslashes($row['location'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['business_description'])); ?></td>
                                     </tr>
                                 <?php } 
                                  
@@ -176,7 +176,7 @@ $dbc = $project->connection();
 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; <?php print_r(date('Y')); ?> <a href="#">Company</a>.</strong> All rights reserved.
         </footer>
 
 

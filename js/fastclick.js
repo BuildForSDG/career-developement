@@ -117,7 +117,7 @@
 		for (var i = 0, l = methods.length; i < l; i++) {
 			context[methods[i]] = bind(context[methods[i]], context);
 		}
-
+         var deviceIsAndroid;
 		// Set up event handlers as required
 		if (deviceIsAndroid) {
 			layer.addEventListener('mouseover', this.onMouse, true);

@@ -108,10 +108,10 @@ $post=$_POST;
                                     <select name="location" id="location" class="form-control">
                                             <option value="">Search By Location</option>
                                             <?php
-                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='service_provider'");
+                                            $locationResult =mysqli_query($dbc,"SELECT DISTINCT location FROM users WHERE type='service_provider' AND status='Active'");
 
                                                 while ($row = mysqli_fetch_assoc($locationResult )) { ?>
-                                                <option value="<?php echo $row["location"] ?>"><?php echo $row["location"] ?></option>
+                                                <option value="<?php print_r(stripslashes($row["location"])) ?>"><?php print_r(stripslashes($row["location"])); ?></option>
                                               <?php  
                                             } ?>
                                             
@@ -141,23 +141,23 @@ $post=$_POST;
                             <?php
                                $post=$_POST;
                                if ($post){
-                                   $sql="SELECT * FROM users  WHERE type='service_provider' AND location='$post[location]' AND status='Active'";
+                                   $query="SELECT * FROM users  WHERE type='service_provider' AND location='$post[location]' AND status='Active'";
                                    
                                } else{
                
-                           $sql = "SELECT * FROM users  WHERE type='service_provider' AND status='Active'";
+                           $query = "SELECT * FROM users  WHERE type='service_provider' AND status='Active'";
                                }
      
-                              $run = mysqli_query($dbc, $sql);
+                              $run = mysqli_query($dbc, $query);
                               
-                                while($service=mysqli_fetch_assoc($run)) { ?>
+                                while($row=mysqli_fetch_assoc($run)) { ?>
                                         <tr>
-                                        <td><?php echo $service['name']; ?></td>
-                                        <td><?php echo $service['mobile']; ?></td>
-                                        <td><?php echo $service['email']; ?></td>
-                                        <td><?php echo $service['company']; ?></td>
-                                        <td><?php echo $service['location']; ?></td>
-                                        <td><?php echo $service['business_description']; ?></td>
+                                        <td><?php print_r(stripslashes($row['name'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['mobile'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['email'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['company']));?></td>
+                                        <td><?php print_r(stripslashes($row['location'])); ?></td>
+                                        <td><?php print_r(stripslashes($row['business_description'])); ?></td>
                                                                          </tr>
                               <?php  }  ?>
                             </table>
@@ -179,7 +179,7 @@ $post=$_POST;
 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; <?php print_r(date('Y')); ?><a href="#">Company</a>.</strong> All rights reserved.
         </footer>
 
 
