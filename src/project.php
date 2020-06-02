@@ -11,8 +11,8 @@ class Project
   function connection()
   {
     $servername = $_SERVER['SERVER_NAME'];
-    $username = "Alalinga";
-    $password = "MUba$17912sophia";
+    $username = "root";
+    $password = "";
     $database = "careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
@@ -38,98 +38,102 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
     }
   }
 
-  function confirmationMail($email, $name)
+  function confirmationMail($id, $name)
   {
     $subject = "Account Activated Notification";
-    $server=$_SERVER['SERVER_NAME'];
+    $server = $_SERVER['SERVER_NAME'];
     $message = "Hello " . $name . ",\r\n\r\n"
-      . "Your  account has been created.Click here: " . $server . '/' . $email . "  to log in.\r\n\r\n";
+      . "Your  account has been created.Click here: " . $server . '?id= ' . $id . "  to log in.\r\n\r\n";
 
     $headers = "From:  <no-reply@" . $server . ">";
 
 
-    mail($email, $subject, $message, $headers);
+    mail($id, $subject, $message, $headers);
   }
 
-
-
-  function loginUser($dbc,$email,$password){
-    $q="SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
-
-    $r=mysqli_query($dbc,$q);
-
-    if(mysqli_num_rows($r)==1){
-
-      $x=mysqli_fetch_assoc($r);
-      if($x['status']=='Active'){
-        $_SESSION['user']=$x;
-        //print_r($_SESSION['user']);
-        header('Location:dashboard.php');
-      }
-  }
-  }
-  function updateUserInfo($dbc)
+  function confirmUser($dbc)
   {
-    if(isset($_POST)){
-    $id = $_POST['id'];
-    $name = $_POST['name'];
-    $mobile= $_POST['mobile'];
-    $email= $_POST['email'];
-    $location= $_POST['location'];
-   
+    $query1= " SELECT * FROM users WHERE token='$_GET[id]' ";
+    $run1= mysqli_query($dbc,$query1);
+    if(mysqli_num_rows($run1)==1){
+      $record= mysqli_fetch_assoc($run1);
+      $_SESSION['user']=$record;
+
+
+
+      $query2= " UPDATE users SET status='Active' ";
+      $run2= mysqli_query($dbc,$query2);
     
-
-
-    if($_POST['type'] == 'trainee')
-    {
-      $educational_level= $_POST['educational_level'];
-        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level' WHERE id='$id'";
-      }else{
-        $company= $_POST['company'];
-        $business_description= $_POST['business_description'];
-        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', company='$company', business_description='$business_description'  WHERE id='$id'";
     }
   }
 
+  function loginUser($dbc, $email, $password)
+  {
+    $q = "SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
+
+    $r = mysqli_query($dbc, $q);
+
+    if (mysqli_num_rows($r) == 1) {
+
+      $x = mysqli_fetch_assoc($r);
+      if ($x['status'] == 'Active') {
+        $_SESSION['user'] = $x;
+        //print_r($_SESSION['user']);
+        header('Location:dashboard.php');
+      }
+    }
+  }
+  function updateUserInfo($dbc)
+  {
+    if (isset($_POST)) {
+      $id = $_POST['id'];
+      $name = $_POST['name'];
+      $mobile = $_POST['mobile'];
+      $email = $_POST['email'];
+      $location = $_POST['location'];
+
+
+
+
+      if ($_POST['type'] == 'trainee') {
+        $educational_level = $_POST['educational_level'];
+        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level' WHERE id='$id'";
+      } else {
+        $company = $_POST['company'];
+        $business_description = $_POST['business_description'];
+        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', company='$company', business_description='$business_description'  WHERE id='$id'";
+      }
+    }
+
     $run = mysqli_query($dbc, $query);
-    if($run)
-    {
+    if ($run) {
       return true;
     }
   }
 
 
 
-  function displayUserCount($dbc){
-     $numbers=[];
-     $query1= " SELECT * FROM users WHERE type='trainee' ";
-     $run1= mysqli_query($dbc,$query1);
-     $numbers['numbers_of_trainees']= mysqli_num_rows($run1);
+  function displayUserCount($dbc)
+  {
+    $numbers = [];
+    $query1 = " SELECT * FROM users WHERE type='trainee' ";
+    $run1 = mysqli_query($dbc, $query1);
+    $numbers['numbers_of_trainees'] = mysqli_num_rows($run1);
 
-     $query2= " SELECT * FROM users WHERE type='trainer' ";
-     $run2= mysqli_query($dbc,$query2);
-     $numbers['numbers_of_trainers']= mysqli_num_rows($run2);
-
-
-     $query3= " SELECT * FROM users WHERE type='investor' ";
-     $run3= mysqli_query($dbc,$query3);
-     $numbers['numbers_of_investors']= mysqli_num_rows($run3);
+    $query2 = " SELECT * FROM users WHERE type='trainer' ";
+    $run2 = mysqli_query($dbc, $query2);
+    $numbers['numbers_of_trainers'] = mysqli_num_rows($run2);
 
 
-     $query4= " SELECT * FROM users WHERE type='service_provider' ";
-     $run4= mysqli_query($dbc,$query4);
-     $numbers['service_providers']= mysqli_num_rows($run4);
-
-     return $numbers;
+    $query3 = " SELECT * FROM users WHERE type='investor' ";
+    $run3 = mysqli_query($dbc, $query3);
+    $numbers['numbers_of_investors'] = mysqli_num_rows($run3);
 
 
+    $query4 = " SELECT * FROM users WHERE type='service_provider' ";
+    $run4 = mysqli_query($dbc, $query4);
+    $numbers['service_providers'] = mysqli_num_rows($run4);
 
+    return $numbers;
   }
-  
-
-
-  
-
 }
-
-
