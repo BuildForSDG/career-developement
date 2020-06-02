@@ -41,10 +41,11 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
   function confirmationMail($email, $name)
   {
     $subject = "Account Activated Notification";
+    $server=$_SERVER['SERVER_NAME'];
     $message = "Hello " . $name . ",\r\n\r\n"
-      . "Your  account has been created.Click here: " . $_SERVER['SERVER_NAME'] . '/' . $email . "  to log in.\r\n\r\n";
+      . "Your  account has been created.Click here: " . $server . '/' . $email . "  to log in.\r\n\r\n";
 
-    $headers = "From:  <no-reply@" . $_SERVER['SERVER_NAME'] . ">";
+    $headers = "From:  <no-reply@" . $server . ">";
 
 
     mail($email, $subject, $message, $headers);
@@ -69,6 +70,7 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
   }
   function updateUserInfo($dbc)
   {
+    if(isset($_POST)){
     $id = $_POST['id'];
     $name = $_POST['name'];
     $mobile= $_POST['mobile'];
@@ -87,6 +89,8 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
         $business_description= $_POST['business_description'];
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level', company='$company', business_description='$business_description'  WHERE id='$id'";
     }
+  }
+
     $run = mysqli_query($dbc, $query);
     if($run)
     {
