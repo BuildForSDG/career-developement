@@ -11,8 +11,8 @@ class Project
   function connection()
   {
     $servername = $_SERVER['SERVER_NAME'];
-    $username = "root";
-    $password = "";
+    $username = "Alalinga";
+    $password = "MUba$17912sophia";
     $database = "careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
@@ -87,7 +87,7 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
       }else{
         $company= $_POST['company'];
         $business_description= $_POST['business_description'];
-        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level', company='$company', business_description='$business_description'  WHERE id='$id'";
+        $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', company='$company', business_description='$business_description'  WHERE id='$id'";
     }
   }
 
@@ -100,7 +100,31 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
 
 
 
-  
+  function displayUserCount($dbc){
+     $numbers=[];
+     $query1= " SELECT * FROM users WHERE type='trainee' ";
+     $run1= mysqli_query($dbc,$query1);
+     $numbers['numbers_of_trainees']= mysqli_num_rows($run1);
+
+     $query2= " SELECT * FROM users WHERE type='trainer' ";
+     $run2= mysqli_query($dbc,$query2);
+     $numbers['numbers_of_trainers']= mysqli_num_rows($run2);
+
+
+     $query3= " SELECT * FROM users WHERE type='investor' ";
+     $run3= mysqli_query($dbc,$query3);
+     $numbers['numbers_of_investors']= mysqli_num_rows($run3);
+
+
+     $query4= " SELECT * FROM users WHERE type='service_provider' ";
+     $run4= mysqli_query($dbc,$query4);
+     $numbers['service_providers']= mysqli_num_rows($run4);
+
+     return $numbers;
+
+
+
+  }
   
 
 
