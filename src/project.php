@@ -41,7 +41,7 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
   function confirmationMail($id, $name)
   {
     $subject = "Account Activated Notification";
-    $server = $_SERVER['SERVER_NAME'];
+    $server= $_SERVER['SERVER_NAME'];
     $message = "Hello " . $name . ",\r\n\r\n"
       . "Your  account has been created.Click here: " . $server . '?id= ' . $id . "  to log in.\r\n\r\n";
 
@@ -53,7 +53,8 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
 
   function confirmUser($dbc)
   {
-    $query1= " SELECT * FROM users WHERE token='$_GET[id]' ";
+    $id=htmlspecialchars($_GET['id'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5, 'UTF-8');
+    $query1= " SELECT * FROM users WHERE token='$id' ";
     $run1= mysqli_query($dbc,$query1);
     if(mysqli_num_rows($run1)==1){
       $record= mysqli_fetch_assoc($run1);
