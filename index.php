@@ -21,7 +21,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet"> 
 
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="http://www.kawolegal.com/assets/css/style.css" rel="stylesheet">
     
 
 

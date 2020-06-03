@@ -69,15 +69,15 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
 
   function loginUser($dbc, $email, $password)
   {
-    $q = "SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
+    $query = "SELECT * FROM users WHERE email= '$email' && password= md5('$password')";
 
-    $r = mysqli_query($dbc, $q);
+    $run = mysqli_query($dbc, $q);
 
-    if (mysqli_num_rows($r) == 1) {
+    if (mysqli_num_rows($run) == 1) {
 
-      $x = mysqli_fetch_assoc($r);
-      if ($x['status'] == 'Active') {
-        $_SESSION['user'] = $x;
+      $row = mysqli_fetch_assoc($r);
+      if ($row['status'] == 'Active') {
+        $_SESSION['user'] = $row;
         //print_r($_SESSION['user']);
         header('Location:dashboard.php');
       }
@@ -85,22 +85,23 @@ VALUES ('$name','$type_of_user','$email','$password','$mobile','$location','$bus
   }
   function updateUserInfo($dbc)
   {
-    if (isset($_POST)) {
-      $id = $_POST['id'];
-      $name = $_POST['name'];
-      $mobile = $_POST['mobile'];
-      $email = $_POST['email'];
-      $location = $_POST['location'];
+    $post=$_POST;
+    if (isset($post)) {
+      $id = $post['id'];
+      $name = $post['name'];
+      $mobile = $post['mobile'];
+      $email = $post['email'];
+      $location = $post['location'];
 
 
 
 
-      if ($_POST['type'] == 'trainee') {
-        $educational_level = $_POST['educational_level'];
+      if ($post['type'] == 'trainee') {
+        $educational_level = $post['educational_level'];
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', educational_level='$educational_level' WHERE id='$id'";
       } else {
-        $company = $_POST['company'];
-        $business_description = $_POST['business_description'];
+        $company = $post['company'];
+        $business_description = $post['business_description'];
         $query = "UPDATE users SET name='$name', mobile='$mobile', email='$email', location='$location', company='$company', business_description='$business_description'  WHERE id='$id'";
       }
     }

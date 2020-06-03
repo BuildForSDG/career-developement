@@ -210,4 +210,4 @@ $count = $project->displayUserCount($dbc);
   </div>
   <!-- ./wrapper -->
 
-  <?php include('config/footer1.php');
+  <?php include "config/footer1.php";
