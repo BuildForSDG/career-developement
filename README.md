@@ -1,29 +1,27 @@
-A one-liner phrase describing this project or app
 
-[![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
+---A directory of relevant stakeholders that can contribute to that people can contact to develope their career.
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b36569c563c0474d9d1d027635a2f4e6)](https://www.codacy.com/gh/BuildForSDG/career-developement?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=BuildForSDG/career-developement&amp;utm_campaign=Badge_Grade)
 
 ## About
 
-What is this project about. Ok to enrich here or the section above it with an image. 
+ 
+Unemployment is a major problem across Africa. A major cause of unemployment are lack of skill training.
+However there a some institutes that offer such training in our towns and cities.This app will make it easy for people to locate such centre which is within reach or at a specific location. Another criteria for locating a skill training centre is the type of training or discipline of interest. For example, fashion, artistry, catering, beautician, etc. 
+When someone also wants to start a business, they can use the same platform to get expert advice and financial support in the form of loan, equity or whatever. 
+In addition to that the platfrom allows for any other business that relates to people starting a career can also join the platform
+All the above resource centers are searchable by location.
 
-Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory
 
-This is a simple php starter repo template for setting up your project. The setup contains
-
-- Composer: For adding third party dependencies
-
-- phpunit: For runnung tests
-
-- php-cs-fixer: For formatting code to match php coding standard
 
 ## Why
 
-Talk about what problem this solves, what SDG(s) and SGD targets it addresses and why these are imoirtant
+The project solves goal 1 (No Poverty) problem statement 1 (Build a tech solution that can be implemented to help reduce poverty in your community). 
+This is because a major cause of poverty is unemployment, our app seek to help people who want to kick start or develop their career.
 
 ## Usage
- How would someone use what you have built, include URLs to the deployed app, service e.t.c when you have it setup
-
-
+ 
+For someone to use the app, the person will have to visit the url, create an account, which will be have to be confirmed by a link sent to the mail used to register.
+URL:
 ## Setup
 
 Run `composer install` and `composer dump-autoload` to get started.
@@ -40,7 +38,14 @@ All tests should be written in the test folder.
 
 ## Authors
 
-List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
+Name                       Github Handle             Role
+Thomas Frimpong             thomasfrimpong          Technical Team Lead
+Alalinga Mubarik            mubarikjahbless         Contributor
+Hope Avalon Gado            Equinox07               Contributor
+Alhassan Kiwandeen          A-Kiwams                Contributor
+Harry Kay                   HarryKayNeezy           Contributor
+Patience Teiko Tetteh       Teik                    Contributor        
+Jida Asare                                        (Cheerleader)
 
 ## Contributing
 If this project sounds interesting to you and you'd like to contribute, thank you!
@@ -50,12 +55,9 @@ First, you can send a mail to buildforsdg@andela.com to indicate your interest, 
 3.  area three (e.g here is the zoom link to our end-of sprint webinar, join and provide feedback as a stakeholder if you can)
 
 ## Acknowledgements
+The UI of the app was build based on the AdminLTE Bootstrap Admin Dashboard Template (adminlte.io).
+I want to thank God for this wonderful idea that i believe will benefit society.
 
-Did you use someone else’s code?
-Do you want to thank someone explicitly?
-Did someone’s blog post spark off a wonderful idea or give you a solution to nagging problem?
-
-It's powerful to always give credit.
 
 ## LICENSE
 MIT
