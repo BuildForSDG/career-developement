@@ -38,14 +38,14 @@ All tests should be written in the test folder.
 
 ## Authors
 
-Name                       Github Handle             Role
-Thomas Frimpong             thomasfrimpong          Technical Team Lead
-Alalinga Mubarik            mubarikjahbless         Contributor
-Hope Avalon Gado            Equinox07               Contributor
-Alhassan Kiwandeen          A-Kiwams                Contributor
-Harry Kay                   HarryKayNeezy           Contributor
-Patience Teiko Tetteh       Teik                    Contributor        
-Jida Asare                                        (Cheerleader)
+- Name                       Github Handle             Role
+- Thomas Frimpong             thomasfrimpong          Technical Team Lead
+- Alalinga Mubarik            mubarikjahbless         Contributor
+- Hope Avalon Gado            Equinox07               Contributor
+- Alhassan Kiwandeen          A-Kiwams                Contributor
+- Harry Kay                   HarryKayNeezy           Contributor
+- Patience Teiko Tetteh       Teik                    Contributor        
+- Jida Asare                                        (Cheerleader)
 
 ## Contributing
 If this project sounds interesting to you and you'd like to contribute, thank you!
