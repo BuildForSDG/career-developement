@@ -11,9 +11,9 @@ class Project
   function connection()
   {
     $servername = $_SERVER['SERVER_NAME'];
-    $username = "root";
-    $password = "";
-    $database = "careerdb";
+    $username = "dgg_25946633";
+    $password = "princeofpeace";
+    $database = "dgg_25946633_careerdb";
 
     $dbc = mysqli_connect($servername, $username, $password, $database);
     return $dbc;
