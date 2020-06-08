@@ -6,9 +6,11 @@ $("select[name=type_of_user]").change(function () {
     }else if(type === "trainer"){
       $("div.description").removeAttr("hidden");
       $("div.category").removeAttr("hidden");
+      $("div.company").removeAttr("hidden");
     }
     else {
-        $("div.description").removeAttr("hidden");  
+        $("div.description").removeAttr("hidden"); 
+        $("div.company").removeAttr("hidden"); 
     }
 
    

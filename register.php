@@ -49,10 +49,7 @@
         <input type="text" class="form-control" placeholder="Full name" name="name" required>
         <span class="fa fa-user form-control-feedback"></span>
       </div>
-      <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Company Name" name="company">
-        <span class="fa fa-home form-control-feedback"></span>
-      </div>
+     
       <div class="form-group has-feedback">
         
         <select name="type_of_user" id="" class="form-control" required>
@@ -84,6 +81,10 @@
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="Location" name="location" required>
         <span class="fa fa-map-marker form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback" hidden>
+        <input type="text" class="form-control" placeholder="Company Name" name="company">
+        <span class="fa fa-home form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback description" hidden>
         <textarea  class="form-control" placeholder="Description Of Business" name="business_description"></textarea>
